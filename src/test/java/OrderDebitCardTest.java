@@ -14,7 +14,7 @@ public class OrderDebitCardTest {
         $("[data-test-id='phone'] input").setValue("+79131345555");
         $("[data-test-id='agreement']").click();
         $(".button").click();
-        $(withText("Ваша заявка успешно отправлена!")).shouldBe(visible, Duration.ofMillis(5000));
+        $("[data-test-id='order-success']").shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class OrderDebitCardTest {
         $("[data-test-id='phone'] input").setValue("+79131345555");
         $("[data-test-id='agreement']").click();
         $(".button").click();
-        $("[data-test-id='name'] .input__sub").shouldHave(text("Поле обязательно для заполнения"));
+        $("[data-test-id='name'].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class OrderDebitCardTest {
         $("[data-test-id='phone'] input").setValue("+79131345555");
         $("[data-test-id='agreement']").click();
         $(".button").click();
-        $("[data-test-id='name'] .input__sub").shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
+        $("[data-test-id='name'].input_invalid .input__sub").shouldHave(text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
 
@@ -45,7 +45,7 @@ public class OrderDebitCardTest {
         $("[data-test-id='phone'] input").setValue("");
         $("[data-test-id='agreement']").click();
         $(".button").click();
-        $("[data-test-id='phone'] .input__sub").shouldHave(text("Поле обязательно для заполнения"));
+        $("[data-test-id='phone'].input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class OrderDebitCardTest {
         $("[data-test-id='phone'] input").setValue("88005553535"); // без плюса в начале
         $("[data-test-id='agreement']").click();
         $(".button").click();
-        $("[data-test-id='phone'] .input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
+        $("[data-test-id='phone'].input_invalid .input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
     @Test
